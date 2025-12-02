@@ -47,4 +47,20 @@ void sendToPushingBox(int lightValue) {
   }
 }
 
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
+
+  Serial.print("Connecting to WiFi");
+  WiFi.begin(ssid, pass);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println("\nWiFi Connected!");
+}
 
