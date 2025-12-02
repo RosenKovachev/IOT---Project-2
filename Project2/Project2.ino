@@ -75,4 +75,19 @@ void loop() {
     lastPress = now;
     Serial.println(">>> SNOOZE FOR 15 SECONDS <<<");
   }
+lastButton = buttonValue;
+
+  bool bright = (lightValue > lightLimit);
+  bool snoozed = now < snoozeUntil;
+
+  // --- ALARM LOGIC ---
+  if (bright && !snoozed) {
+
+    digitalWrite(buzzerPin, HIGH);  // alarm on
+
+    if (!emailSent) {
+      sendToPushingBox(lightValue); // send email ONCE
+      emailSent = true;
+    }
+
 
