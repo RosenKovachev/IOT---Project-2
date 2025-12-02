@@ -90,4 +90,16 @@ lastButton = buttonValue;
       emailSent = true;
     }
 
+    } else {
+    digitalWrite(buzzerPin, LOW);   // alarm off
+    emailSent = false;              // allow next trigger
+  }
+
+  // --- DEBUG OUTPUT ---
+  Serial.print("Light: "); Serial.print(lightValue);
+  Serial.print(" | Bright: "); Serial.print(bright);
+  Serial.print(" | Snoozed: "); Serial.println(snoozed);
+
+  delay(300);
+}
 
