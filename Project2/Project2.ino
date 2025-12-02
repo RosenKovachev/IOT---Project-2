@@ -63,4 +63,16 @@ void setup() {
 
   Serial.println("\nWiFi Connected!");
 }
+void loop() {
+
+  int lightValue = analogRead(lightPin);
+  int buttonValue = digitalRead(buttonPin);
+  unsigned long now = millis();
+
+  // --- BUTTON PRESS (Active LOW) ---
+  if (lastButton == HIGH && buttonValue == LOW && (now - lastPress) > debounceMs) {
+    snoozeUntil = now + snoozeMs;
+    lastPress = now;
+    Serial.println(">>> SNOOZE FOR 15 SECONDS <<<");
+  }
 
