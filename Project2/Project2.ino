@@ -29,3 +29,22 @@ const unsigned long debounceMs = 200;
 unsigned long lastPress = 0;
 int lastButton = HIGH;
 bool emailSent = false;
+
+void sendToPushingBox(int lightValue) {
+  Serial.print("Sending to PushingBox... ");
+
+  if (client.connect(serverName, 80)) {
+    Serial.println("Connected!");
+
+    String url = "/pushingbox?devid=" + deviceID + "&light=" + String(lightValue);
+
+    client.println("GET " + url + " HTTP/1.1");
+    client.println("Host: api.pushingbox.com");
+    client.println("Connection: close");
+    client.println();
+  } else {
+    Serial.println("FAILED to connect.");
+  }
+}
+
+
